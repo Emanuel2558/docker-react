@@ -1,13 +1,16 @@
-FROM node:alpine
+FROM node:alpine AS builder 
 
 WORKDIR '/app'
+EXPOSE 80
 
 COPY package.json .
-COPY . .
 RUN npm cache clean --force
 RUN rm -rf node_modules package-lock.json coverage
 RUN npm install
-RUN npm audit fix
+COPY . .
+RUN npm run build
 
 
-CMD ["npm", "run", "start"]
+FROM nginx
+
+COPY --from=builder /app/build /usr/share/nginx/html
