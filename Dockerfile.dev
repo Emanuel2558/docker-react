@@ -7,5 +7,3 @@ RUN npm install
 COPY . .
 
 CMD ["npm", "run", "start"]
-# CMD ["npm", "audit", "fix"]
-# CMD ["npm", "fund"]
