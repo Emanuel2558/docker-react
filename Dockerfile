@@ -4,6 +4,8 @@ WORKDIR '/app'
 EXPOSE 80
 
 COPY package.json .
+RUN npm cache clean --force
+RUN rm -rf node_modules package-lock.json coverage
 RUN npm install
 COPY . .
 RUN npm run build
