@@ -3,6 +3,7 @@ FROM node:alpine AS builder
 WORKDIR '/app'
 EXPOSE 80
 
+
 COPY package.json .
 RUN npm install
 RUN npm audit fix
